@@ -1,4 +1,4 @@
-enum ConnectionState {
+enum LoadingState {
   loading,
   error,
   done,

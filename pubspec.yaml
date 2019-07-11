@@ -27,6 +27,7 @@ dependencies:
   rxdart: ^0.22.0
   http: ^0.12.0+2
   transparent_image: ^1.0.0
+  image_downloader: ^0.16.0
 
 dev_dependencies:
   flutter_test:
