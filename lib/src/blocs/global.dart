@@ -1,0 +1,3 @@
+class GlobalBloc {
+  GlobalBloc() {}
+}
