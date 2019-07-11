@@ -28,69 +28,68 @@ class HomeScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.topCenter,
                       child: StreamBuilder<Meme>(
-                          stream: _globalBloc.memesBloc.currentMeme$,
-                          builder: (BuildContext context,
-                              AsyncSnapshot<Meme> snapshot) {
-                            if (!snapshot.hasData) {
-                              return Container(
-                                width: double.infinity,
-                                height: _screenHeight / 1.81,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            }
+                        stream: _globalBloc.memesBloc.currentMeme$,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<Meme> snapshot) {
+                          if (!snapshot.hasData) {
+                            return Container(
+                              width: double.infinity,
+                              height: _screenHeight / 1.81,
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
 
-                            final Meme _meme = snapshot.data;
-                            return Stack(
-                              children: <Widget>[
-                                Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      PageRouteBuilder(
-                                        opaque: false,
-                                        pageBuilder:
-                                            (BuildContext context, _, __) {
-                                          return GestureDetector(
-                                            onTap: () => Navigator.pop(context),
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              color:
-                                                  Colors.black.withOpacity(0.5),
-                                              child: Hero(
-                                                tag: "meme",
-                                                child:
-                                                    FadeInImage.memoryNetwork(
-                                                  placeholder:
-                                                      kTransparentImage,
-                                                  image: _meme.url,
-                                                ),
+                          final Meme _meme = snapshot.data;
+                          return Stack(
+                            children: <Widget>[
+                              Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    PageRouteBuilder(
+                                      opaque: false,
+                                      pageBuilder:
+                                          (BuildContext context, _, __) {
+                                        return GestureDetector(
+                                          onTap: () => Navigator.pop(context),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            color:
+                                                Colors.black.withOpacity(0.7),
+                                            child: Hero(
+                                              tag: "meme",
+                                              child: FadeInImage.memoryNetwork(
+                                                placeholder: kTransparentImage,
+                                                image: _meme.url,
                                               ),
                                             ),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: _screenHeight / 1.81,
-                                    child: Hero(
-                                      tag: "meme",
-                                      child: FadeInImage.memoryNetwork(
-                                        fit: BoxFit.fill,
-                                        placeholder: kTransparentImage,
-                                        image: _meme.url,
-                                      ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: _screenHeight / 1.81,
+                                  child: Hero(
+                                    tag: "meme",
+                                    child: FadeInImage.memoryNetwork(
+                                      fit: BoxFit.fill,
+                                      placeholder: kTransparentImage,
+                                      image: _meme.url,
                                     ),
                                   ),
                                 ),
-                              ],
-                            );
-                          }),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
@@ -114,68 +113,7 @@ class HomeScreen extends StatelessWidget {
                 height: _screenHeight / 5,
                 width: double.infinity,
                 child: Row(
-                  children: <Widget>[
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Re-rolls",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                              ),
-                            ),
-                            Text(
-                              "1",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Container(
-                        height: double.infinity,
-                        width: 2,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Saved",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                              ),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                  children: <Widget>[],
                 ),
               ),
               Padding(
