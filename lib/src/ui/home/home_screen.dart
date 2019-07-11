@@ -47,13 +47,45 @@ class HomeScreen extends StatelessWidget {
                                 Center(
                                   child: CircularProgressIndicator(),
                                 ),
-                                Container(
-                                  width: double.infinity,
-                                  height: _screenHeight / 1.81,
-                                  child: FadeInImage.memoryNetwork(
-                                    fit: BoxFit.fill,
-                                    placeholder: kTransparentImage,
-                                    image: _meme.url,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      PageRouteBuilder(
+                                        opaque: false,
+                                        pageBuilder:
+                                            (BuildContext context, _, __) {
+                                          return GestureDetector(
+                                            onTap: () => Navigator.pop(context),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                              child: Hero(
+                                                tag: "meme",
+                                                child:
+                                                    FadeInImage.memoryNetwork(
+                                                  placeholder:
+                                                      kTransparentImage,
+                                                  image: _meme.url,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: _screenHeight / 1.81,
+                                    child: Hero(
+                                      tag: "meme",
+                                      child: FadeInImage.memoryNetwork(
+                                        fit: BoxFit.fill,
+                                        placeholder: kTransparentImage,
+                                        image: _meme.url,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
