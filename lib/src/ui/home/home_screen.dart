@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:memec/src/blocs/global.dart';
+import 'package:memec/src/models/meme.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final double _screenWidth = MediaQuery.of(context).size.width;
+    final GlobalBloc _globalBloc = Provider.of<GlobalBloc>(context);
     final double _screenHeight = MediaQuery.of(context).size.height;
 
     return SafeArea(
@@ -23,11 +26,32 @@ class HomeScreen extends StatelessWidget {
                   children: <Widget>[
                     Align(
                       alignment: Alignment.topCenter,
-                      child: Container(
-                        width: double.infinity,
-                        height: _screenHeight / 1.81,
-                        color: Colors.white,
-                      ),
+                      child: StreamBuilder<Meme>(
+                          stream: _globalBloc.memesBloc.currentMeme$,
+                          builder: (BuildContext context,
+                              AsyncSnapshot<Meme> snapshot) {
+                            if (!snapshot.hasData) {
+                              return Container(
+                                width: double.infinity,
+                                height: _screenHeight / 1.81,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            }
+
+                            final Meme _meme = snapshot.data;
+                            return Container(
+                              width: double.infinity,
+                              height: _screenHeight / 1.81,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(_meme.url),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            );
+                          }),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
@@ -121,7 +145,9 @@ class HomeScreen extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _globalBloc.memesBloc.fetchNextMeme();
+                    },
                     color: Colors.pink,
                     splashColor: Colors.greenAccent,
                     highlightColor: Colors.greenAccent,
@@ -131,9 +157,10 @@ class HomeScreen extends StatelessWidget {
                     child: Text(
                       "Another One!",
                       style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
