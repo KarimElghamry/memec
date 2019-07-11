@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:memec/src/blocs/global.dart';
 import 'package:memec/src/models/meme.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -41,15 +42,21 @@ class HomeScreen extends StatelessWidget {
                             }
 
                             final Meme _meme = snapshot.data;
-                            return Container(
-                              width: double.infinity,
-                              height: _screenHeight / 1.81,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(_meme.url),
-                                  fit: BoxFit.fill,
+                            return Stack(
+                              children: <Widget>[
+                                Center(
+                                  child: CircularProgressIndicator(),
                                 ),
-                              ),
+                                Container(
+                                  width: double.infinity,
+                                  height: _screenHeight / 1.81,
+                                  child: FadeInImage.memoryNetwork(
+                                    fit: BoxFit.fill,
+                                    placeholder: kTransparentImage,
+                                    image: _meme.url,
+                                  ),
+                                ),
+                              ],
                             );
                           }),
                     ),
