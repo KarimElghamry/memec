@@ -1,5 +1,7 @@
 # memec
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/03a1b5bf8cde46578d3352dbf9dafb3d)](https://app.codacy.com/app/KarimElghamry/memec?utm_source=github.com&utm_medium=referral&utm_content=KarimElghamry/memec&utm_campaign=Badge_Grade_Dashboard)
+
 A new Flutter project.
 
 ## Getting Started
